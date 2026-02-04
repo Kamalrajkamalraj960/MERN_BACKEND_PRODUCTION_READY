@@ -131,3 +131,125 @@ Server running
 
 MongoDB connect
 ![alt text](image-5.png)
+
+🟢 Day one THUNDER CLIENT TESTING
+
+🟢 JWT Authentication – Day 1 (Machine Test)
+📌 Project Overview
+
+This project implements JWT-based authentication using Node.js, Express, and MongoDB.
+It focuses on building a secure authentication foundation with protected APIs.
+
+🚀 Features
+
+User Registration
+Password Hashing using bcrypt
+User Login
+JWT Token Generation
+Protected API using JWT middleware
+
+🛠 Tech Stack
+
+Node.js
+Express.js
+MongoDB (Mongoose)
+JSON Web Token (JWT)
+bcryptjs
+dotenv
+
+📂 Folder Structure
+src/
+├── config/
+│   └── db.js
+├── models/
+│   └── User.js
+├── controllers/
+│   ├── authController.js
+│   └── taskController.js
+├── routes/
+│   ├── authRoutes.js
+│   └── taskRoutes.js
+├── middleware/
+│   └── authMiddleware.js
+└── server.js
+
+⚙️ Installation & Setup
+npm install
+npm run dev
+
+Create a .env file:
+
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/jwt_day1
+JWT_SECRET=your_secret_key
+
+🔑 API Endpoints
+🔹 Register
+
+POST /api/auth/register
+
+{
+  "name": "Dimal",
+  "email": "dimal@test.com",
+  "password": "123456"
+}
+
+🔹 Login
+
+POST /api/auth/login
+
+{
+  "email": "dimal@test.com",
+  "password": "123456"
+}
+
+➡️ Returns JWT Token
+
+{
+  "token": "JWT_TOKEN"
+}
+
+🔒 Protected Route
+
+GET /api/tasks
+Headers
+Authorization: Bearer JWT_TOKEN
+
+✅ DAY 1 – TESTING (Thunder Client)
+
+Register a new user
+Login with valid credentials
+Receive JWT token
+Access protected API using Bearer token
+❌ Error Handling (Day-1 Level)
+Duplicate email → 400 Bad Request
+Invalid credentials → 400 Bad Request
+Missing token → 401 Unauthorized
+Invalid / expired token → 401 Unauthorized
+
+🎯 DAY-1 CLOSING LINE
+
+“Today we built authentication.
+It works…
+But this backend is NOT production ready yet.”
+
+✅ DAY-1 FEATURES COMPLETED
+
+User Register
+Password Hashing
+Login
+JWT Token
+Protected-ready APIs
+
+🎉 DAY-1 COMPLETED PROPERLY
+
+JWT authentication foundation is successfully implemented and verified using Thunder Client.
+
+Register success
+![alt text](image-8.png)
+
+Login Success
+![alt text](image-9.png)
+
+Access Protected Route
+![alt text](image-10.png)
