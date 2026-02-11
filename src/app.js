@@ -28,13 +28,11 @@ app.use("/api/users", userRoutes);
 const options = {
   definition: {
     openapi: "3.0.0",
-    info: {
-      title: "Production Ready API",
-      version: "1.0.0",
-    },
+    info: { title: "Production Ready API", version: "1.0.0" },
   },
-  apis: [],
+  apis: ["./src/routes/*.js"], // ✅ point to your routes
 };
+
 
 const specs = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
