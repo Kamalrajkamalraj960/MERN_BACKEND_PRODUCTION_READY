@@ -1,18 +1,29 @@
 import express from "express";
 import cors from "cors";
+import userRoutes from "./routes/user.routes.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./config/swagger.js";
-import authRoutes from "./routes/auth.routes.js";
-import taskRoutes from "./routes/task.routes.js";
+import swaggerJsdoc from "swagger-jsdoc";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
+app.use("/api/users", userRoutes);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Swagger Config
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Production Ready API",
+      version: "1.0.0",
+    },
+  },
+  apis: [],
+};
+
+const specs = swaggerJsdoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 export default app;
