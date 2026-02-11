@@ -1,188 +1,149 @@
-🟢 MERN Backend – Production Ready (Day 7 – Swagger + JWT)
+🚀 MERN Backend – Production Ready (Day 8)
 📌 Project Overview
 
-This project is a production-ready Node.js + Express backend built with:
-
-MongoDB
-JWT Authentication
-Protected Routes
-Swagger API Documentation
-MVC Folder Structure
-It demonstrates secure authentication and team-friendly API documentation using Swagger.
-
-🚀 Features
-✅ User Registration
-✅ User Login (JWT Token Generation)
-✅ Protected Task APIs
-✅ JWT Middleware Authentication
-✅ Swagger API Documentation
-✅ Swagger JWT Authorization Support
-✅ Clean MVC Architecture
-🛠 Tech Stack
+This project is a production-ready backend built using:
 Node.js
 Express.js
-MongoDB (Mongoose)
-JWT (jsonwebtoken)
-Swagger (swagger-jsdoc + swagger-ui-express)
-Nodemon
-dotenv
-CORS
+MongoDB Atlas
+Mongoose
+Swagger (API Docs)
+Environment-based configuration
+The backend is fully deployed and connected to a cloud database.
 
-📁 Folder Structure
-MERN_BACKEND_PRODUCTION_READY/
-│
-├── src/
-│   ├── config/
-│   │   └── swagger.js
-│   │
-│   ├── controllers/
-│   │   ├── auth.controller.js
-│   │   └── task.controller.js
-│   │
-│   ├── middleware/
-│   │   └── auth.middleware.js
-│   │
-│   ├── models/
-│   │   ├── user.model.js
-│   │   └── task.model.js
-│   │
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   └── task.routes.js
-│   │
-│   ├── app.js
-│   └── server.js
-│
-├── .env
-├── package.json
-└── README.md
+🎯 Features
+✅ Environment-based configuration (.env)
+✅ MongoDB Atlas cloud database
+✅ REST API (Create & Get Users)
+✅ Swagger API Documentation
+✅ Production deployment ready
+✅ Secure credential handling
 
-⚙️ Installation
-1️⃣ Clone the repository
+📁 Project Structure
+src/
+ ├── config/
+ │    └── db.js
+ ├── controllers/
+ │    └── user.controller.js
+ ├── models/
+ │    └── user.model.js
+ ├── routes/
+ │    └── user.routes.js
+ ├── app.js
+ └── server.js
+
+.env
+.env.example
+package.json
+README.md
+
+⚙️ Installation & Setup
+1️⃣ Clone Repository
 git clone <your-repo-url>
 cd MERN_BACKEND_PRODUCTION_READY
 
-2️⃣ Install dependencies
+2️⃣ Install Dependencies
 npm install
 
-3️⃣ Create .env file
-PORT=3000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+3️⃣ Create .env File
+Create a .env file in the root directory:
 
-4️⃣ Run the server
+PORT=5000
+NODE_ENV=development
+MONGO_URI=your_mongodb_atlas_connection_string
+
+⚠️ Do NOT commit .env file.
+🗄️ MongoDB Atlas Setup
+Create cluster (Cluster0)
+Create Database User
+Add IP Address (0.0.0.0/0)
+Copy connection string
+Replace username & password
+Add database name (example: /mern)
+Example:
+mongodb+srv://username:password@cluster0.mongodb.net/mern?retryWrites=true&w=majority
+
+▶️ Run Locally
 npm run dev
-Server will start on:
-http://localhost:3000
 
-🔐 Authentication Flow
-🟢 Register
-POST /api/auth/register
-Creates a new user.
+Server runs on:
+http://localhost:5000
 
-🟢 Login
-POST /api/auth/login
-Returns:
+📡 API Endpoints
+🔹 Create User
 
+POST /api/users
+Body:
 {
-  "token": "JWT_TOKEN_HERE"
+  "name": "Manu",
+  "email": "manu@gmail.com"
 }
 
-This token is required for protected routes.
+Response:
+201 Created
+🔹 Get All Users
 
-🟢 Protected Route – Get Tasks
-GET /api/tasks
-Requires JWT token in header:
-Authorization: Bearer <your_token>
-📘 Swagger Documentation
-Swagger UI is available at:
-http://localhost:3000/api-docs
-How to Use Swagger with JWT
+GET /api/users
 
-Login via /api/auth/login
-Copy the token
-Click Authorize (top right)
-Paste ONLY the token (not "Bearer")
-Click Authorize
-Test protected APIs
+Response:
+
+[
+  {
+    "_id": "...",
+    "name": "Manu",
+    "email": "manu@gmail.com",
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
+]
+
+📖 API Documentation
+Swagger available at:
+/api-docs
+
+Example:
+http://localhost:5000/api-docs
+
+After deployment:
+https://your-app-name.onrender.com/api-docs
+
+🌍 Deployment (Render)
+Build Command
+npm install
+
+Start Command
+npm start
 
 
-Swagger Success
+Post method
 ![alt text](image.png)
 
-Register Success
+Get method
 ![alt text](image-1.png)
 
-Login Success
+MongoDB Atlas connect
 ![alt text](image-2.png)
 
-JWT token Success
+Server connect
 ![alt text](image-3.png)
 
-Authentication Success
-![alt text](image-4.png)
 
-MongoDB Compass Success 
-![alt text](image-5.png)
+Environment Variables (Render Dashboard)
+Key	Value
+PORT	10000
+NODE_ENV	production
+MONGO_URI	Atlas Connection String
+🧠 Development vs Production
+Development	Production
+Local testing	Live server
+Debug logs enabled	Optimized performance
+Local database	Cloud database
+Frequent changes	Stable release
+🔐 Why .env Should Not Be Committed?
 
-Server Connect Success
-![alt text](image-6.png)
+Contains sensitive credentials
+Database passwords must stay secret
+Prevents security breaches
+Use .env.example instead
 
-🔎 Why Swagger is Important?
-Makes APIs self-documented
-Helps frontend teams understand endpoints
-Reduces communication gaps
-Allows API testing without Postman
-Improves team collaboration
-Essential for production systems
-👨‍💻 How Frontend Teams Use Swagger
-
-Frontend developers:
-Check request & response formats
-Understand required headers
-View authentication requirements
-Test endpoints directly
-Build UI based on documented responses
-Swagger acts as a contract between backend and frontend teams.
-
-🌿 Git Workflow
-Create a new branch
-git checkout -b feature/swagger-jwt
-Add changes
-git add .
-Commit changes
-git commit -m "Added Swagger with JWT authentication"
-Push branch
-git push origin feature/swagger-jwt
-Merge to main
-git checkout main
-git merge feature/swagger-jwt
-git push origin main
-
-🧪 Thunder Client Testing
-Register
-POST → /api/auth/register
-Login
-POST → /api/auth/login
-Copy token from response.
-Get Tasks
-GET → /api/tasks
-Add Header:
-Authorization : Bearer <token>
-
-🧠 Machine Test Summary (Day 7)
-✔ Setup Swagger
-✔ Document Register
-✔ Document Login
-✔ Document Get Tasks
-✔ Enable JWT Authentication in Swagger
-✔ Test Protected API via Swagger UI
-
-🎯 Final Status
-✔ Authentication Implemented
-✔ Authorization Secured
-✔ Swagger Integrated
-✔ APIs Production Ready
-
-📌 Author
+👨‍💻 Author
 Kamalraj
