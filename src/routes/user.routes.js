@@ -1,10 +1,7 @@
 import express from "express";
-import { v4 as uuidv4 } from "uuid";
+import User from "../models/user.model.js"; // your MongoDB model
 
 const router = express.Router();
-
-// Dummy in-memory users array (replace with MongoDB in production)
-let users = [];
 
 /**
  * @swagger
@@ -22,21 +19,9 @@ let users = [];
  *     responses:
  *       200:
  *         description: List of users
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: string
- *                   name:
- *                     type: string
- *                   email:
- *                     type: string
  */
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  const users = await User.find();
   res.status(200).json(users);
 });
 
@@ -63,27 +48,10 @@ router.get("/", (req, res) => {
  *     responses:
  *       201:
  *         description: User created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                 name:
- *                   type: string
- *                 email:
- *                   type: string
  */
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { name, email } = req.body;
-  if (!name || !email) {
-    return res.status(400).json({ message: "Name and email are required!" });
-  }
-
-  const newUser = { id: uuidv4(), name, email };
-  users.push(newUser);
-
+  const newUser = await User.create({ name, email });
   res.status(201).json(newUser);
 });
 
